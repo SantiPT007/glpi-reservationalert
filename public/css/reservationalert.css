@@ -1,0 +1,165 @@
+/* =========================================================
+   Reservation Alert: tray styles
+   Uses GLPI CSS variables so it inherits light/dark theme.
+   ========================================================= */
+
+/* Tray icon button: matches ticketanswers .notification-bell style exactly */
+#reservationalert-btn {
+    position: relative; /* required for badge absolute positioning */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    margin: 0 3px;
+    cursor: pointer;
+    vertical-align: middle;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+#reservationalert-btn svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+
+/* Unread badge: matches ticketanswers .notification-count */
+#reservationalert-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: rgba(236, 88, 19, 0.95);
+    color: #fff;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    font-weight: 700;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    line-height: 1;
+}
+
+#reservationalert-badge.visible {
+    display: flex;
+}
+
+/* Dropdown panel */
+#reservationalert-panel {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    width: 340px;
+    max-height: 480px;
+    overflow-y: auto;
+    background: var(--tblr-card-bg, #fff);
+    border: 1px solid var(--tblr-border-color, #e6e7e9);
+    border-radius: var(--bs-border-radius-lg, 8px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+}
+
+#reservationalert-panel.open {
+    display: flex;
+}
+
+/* Panel header */
+.ra-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--tblr-border-color, #e6e7e9);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tblr-body-color, #354052);
+    flex-shrink: 0;
+}
+
+.ra-panel-header button {
+    font-size: 11px;
+    padding: 2px 8px;
+    border: none;
+    background: var(--tblr-btn-color, transparent);
+    color: var(--tblr-link-color, #066fd1);
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.ra-panel-header button:hover {
+    text-decoration: underline;
+}
+
+/* Individual notification entry */
+.ra-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--tblr-border-color-translucent, rgba(98,105,118,0.16));
+    cursor: default;
+    transition: background 0.1s;
+    font-size: 13px;
+    color: var(--tblr-body-color, #354052);
+}
+
+.ra-item:last-child {
+    border-bottom: none;
+}
+
+.ra-item:hover {
+    background: var(--tblr-light, #f6f8fb);
+}
+
+.ra-item.unread {
+    background: var(--tblr-primary-lt, #dce9f9);
+}
+
+.ra-item.unread:hover {
+    background: var(--tblr-primary-lt-hover, #c8dcf5);
+}
+
+.ra-item-title {
+    font-weight: 600;
+    color: var(--tblr-body-color, #354052);
+}
+
+.ra-item-meta {
+    font-size: 11px;
+    color: var(--tblr-muted, #626976);
+}
+
+.ra-item-dismiss {
+    align-self: flex-end;
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--tblr-link-color, #066fd1);
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+.ra-item-dismiss:hover {
+    text-decoration: underline;
+}
+
+/* Empty state */
+.ra-empty {
+    padding: 24px 16px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--tblr-muted, #626976);
+}
+
+/* Wrapper so the button+panel are position:relative siblings */
+#reservationalert-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
