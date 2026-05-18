@@ -47,15 +47,22 @@ foreach ($rows as $row) {
         }
 
         $reserver = trim(($row['reserver_firstname'] ?? '') . ' ' . ($row['reserver_name'] ?? ''));
+
+        $glpi_root       = CFG_GLPI['root_doc'] ?? '';
+        $reservationitems_id = (int) ($row['reservationitems_id'] ?? 0);
+        $item_url        = $glpi_root . '/front/' . strtolower($itemtype) . '.form.php?id=' . $items_id . '&forcetab=Reservation$1';
+        $reservation_url = $glpi_root . '/front/reservation.php?reservationitems_id=' . $reservationitems_id;
     }
 
     $out[] = [
-        'id'        => (int) $row['id'],
-        'item_name' => htmlspecialchars($item_name),
-        'begin'     => $begin_str,
-        'reserver'  => htmlspecialchars($reserver),
-        'is_read'   => (bool) $row['is_read'],
+        'id'              => (int) $row['id'],
+        'item_name'       => htmlspecialchars($item_name),
+        'begin'           => $begin_str,
+        'reserver'        => htmlspecialchars($reserver),
+        'is_read'         => (bool) $row['is_read'],
+        'item_url'        => $is_admin && !$is_test ? $item_url : '',
+        'reservation_url' => !$is_test ? $reservation_url : '',
     ];
 }
 
-echo json_encode(['notifications' => $out, 'global_enabled' => $global_enabled]);
+echo json_encode(['notifications' => $out, 'global_enabled' => $global_enabled, 'is_admin' => $is_admin]);

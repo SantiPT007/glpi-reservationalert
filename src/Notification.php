@@ -31,6 +31,7 @@ class Notification extends CommonDBTM
                 'n.date_creation',
                 'r.begin as reservation_begin',
                 'r.end as reservation_end',
+                'r.reservationitems_id as reservationitems_id',
                 'ri.itemtype as item_type',
                 'ri.items_id as item_items_id',
                 'u.name as reserver_name',
