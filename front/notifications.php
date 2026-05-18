@@ -52,9 +52,8 @@ foreach ($rows as $row) {
         $reserver = trim(($row['reserver_firstname'] ?? '') . ' ' . ($row['reserver_name'] ?? ''));
 
         $glpi_root       = CFG_GLPI['root_doc'] ?? '';
-        $reservationitems_id = (int) ($row['reservationitems_id'] ?? 0);
         $item_url        = $glpi_root . '/front/' . strtolower($itemtype) . '.form.php?id=' . $items_id . '&forcetab=Reservation$1';
-        $reservation_url = $glpi_root . '/front/reservation.php?reservationitems_id=' . $reservationitems_id;
+        $reservation_url = $glpi_root . '/front/reservation.php';
     }
 
     $out[] = [
