@@ -105,6 +105,18 @@ https://glpi.exemplo.com/plugins/reservationalert/front/test.php
 
 Retorna JSON com o estado das tabelas e contagem de notificações.
 
+### Remover o plugin completamente
+
+```bash
+rm -rf /var/www/glpi/plugins/reservationalert
+```
+
+Depois no GLPI desativar o plugin antes de apagar a pasta, ou limpar a cache após apagar:
+
+```bash
+rm -rf /var/www/glpi/files/_cache/*
+```
+
 ### Repor o plugin de raiz
 
 ```bash
