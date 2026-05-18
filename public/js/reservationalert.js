@@ -101,7 +101,7 @@
         return true;
     }
 
-    function renderPanel(notifications, isAdmin) {
+    function renderPanel(notifications) {
         const $panel = $('#reservationalert-panel');
         const $badge = $('#reservationalert-badge');
         if (!$panel.length) return;
@@ -133,19 +133,11 @@
         }
 
         notifications.forEach(function (n) {
-            let linkHtml = '';
-            if (isAdmin && n.item_url) {
-                linkHtml = `<a class="ra-item-link" href="${n.item_url}" target="_blank">Editar reserva</a>`;
-            } else if (n.reservation_url) {
-                linkHtml = `<a class="ra-item-link" href="${n.reservation_url}" target="_blank">Ver calendário</a>`;
-            }
-
             const $item = $(`
                 <div class="ra-item ${n.is_read ? '' : 'unread'}" data-id="${n.id}">
                     <span class="ra-item-title">${escHtml(n.item_name)}</span>
                     <span class="ra-item-meta">Início: ${escHtml(n.begin)}</span>
                     <span class="ra-item-meta">Reservado por: ${escHtml(n.reserver)}</span>
-                    ${linkHtml}
                     ${!n.is_read ? `<button class="ra-item-dismiss" data-id="${n.id}">Dispensar</button>` : ''}
                 </div>
             `);
@@ -183,7 +175,7 @@
                              });
 
                 notifications.forEach(n => knownIds.add(n.id));
-                renderPanel(notifications, data.is_admin === true);
+                renderPanel(notifications);
             },
         });
     }

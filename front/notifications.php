@@ -19,9 +19,6 @@ foreach ($rows as $row) {
     // Test notifications have reservations_id=0 and no joined data
     $is_test = ((int) $row['reservations_id']) === 0;
 
-    $item_url        = '';
-    $reservation_url = '';
-
     if ($is_test) {
         $item_name = '[TESTE] Notificacao de teste';
         $begin_str = 'Agora';
@@ -50,21 +47,15 @@ foreach ($rows as $row) {
         }
 
         $reserver = trim(($row['reserver_firstname'] ?? '') . ' ' . ($row['reserver_name'] ?? ''));
-
-        $glpi_root       = CFG_GLPI['root_doc'] ?? '';
-        $item_url        = $glpi_root . '/front/' . strtolower($itemtype) . '.form.php?id=' . $items_id . '&forcetab=Reservation$1';
-        $reservation_url = $glpi_root . '/front/reservation.php';
     }
 
     $out[] = [
-        'id'              => (int) $row['id'],
-        'item_name'       => htmlspecialchars($item_name),
-        'begin'           => $begin_str,
-        'reserver'        => htmlspecialchars($reserver),
-        'is_read'         => (bool) $row['is_read'],
-        'item_url'        => $is_admin && !$is_test ? $item_url : '',
-        'reservation_url' => !$is_test ? $reservation_url : '',
+        'id'        => (int) $row['id'],
+        'item_name' => htmlspecialchars($item_name),
+        'begin'     => $begin_str,
+        'reserver'  => htmlspecialchars($reserver),
+        'is_read'   => (bool) $row['is_read'],
     ];
 }
 
-echo json_encode(['notifications' => $out, 'global_enabled' => $global_enabled, 'is_admin' => $is_admin]);
+echo json_encode(['notifications' => $out, 'global_enabled' => $global_enabled]);

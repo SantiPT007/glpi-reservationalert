@@ -22,7 +22,7 @@
 
 #reservationalert-btn:hover,
 #reservationalert-btn:focus {
-    background: rgba(0, 0, 0, 0.18) !important;
+    background: #E95420 !important;
     color: #fff !important;
     box-shadow: none !important;
     outline: none !important;
@@ -156,18 +156,6 @@
 }
 
 .ra-item-dismiss:hover {
-    text-decoration: underline;
-}
-
-.ra-item-link {
-    align-self: flex-start;
-    margin-top: 4px;
-    font-size: 11px;
-    color: var(--tblr-link-color, #066fd1);
-    text-decoration: none;
-}
-
-.ra-item-link:hover {
     text-decoration: underline;
 }
 
