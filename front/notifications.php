@@ -19,6 +19,9 @@ foreach ($rows as $row) {
     // Test notifications have reservations_id=0 and no joined data
     $is_test = ((int) $row['reservations_id']) === 0;
 
+    $item_url        = '';
+    $reservation_url = '';
+
     if ($is_test) {
         $item_name = '[TESTE] Notificacao de teste';
         $begin_str = 'Agora';
