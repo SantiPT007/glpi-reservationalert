@@ -57,9 +57,9 @@
         $wrapper.append($btn).append($panel);
 
         $btn.on('mouseenter', function () {
-            this.style.setProperty('background', '#E95420', 'important');
+            this.style.setProperty('background', '#6c757d', 'important');
             this.style.setProperty('color', '#fff', 'important');
-            this.style.setProperty('border-color', '#E95420', 'important');
+            this.style.setProperty('border-color', '#6c757d', 'important');
         }).on('mouseleave', function () {
             this.style.removeProperty('background');
             this.style.removeProperty('color');
