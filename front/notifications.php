@@ -49,12 +49,26 @@ try {
             $reserver = trim(($row['reserver_firstname'] ?? '') . ' ' . ($row['reserver_name'] ?? ''));
         }
 
+        $link = '';
+        if (!$is_test) {
+            global $CFG_GLPI;
+            $root = $CFG_GLPI['root_doc'] ?? '';
+            if ($is_admin) {
+                $itemtype_lower = strtolower((string) ($row['item_type'] ?? ''));
+                $iid            = (int) ($row['item_items_id'] ?? 0);
+                $link = $root . '/front/' . $itemtype_lower . '.form.php?id=' . $iid . '&forcetab=Reservation%241';
+            } else {
+                $link = $root . '/front/reservation.php';
+            }
+        }
+
         $out[] = [
             'id'        => (int) $row['id'],
             'item_name' => htmlspecialchars($item_name),
             'begin'     => $begin_str,
             'reserver'  => htmlspecialchars($reserver),
             'is_read'   => (bool) $row['is_read'],
+            'link'      => $link,
         ];
     }
 
