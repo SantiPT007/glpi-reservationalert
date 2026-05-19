@@ -20,13 +20,6 @@
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-#reservationalert-btn:hover,
-#reservationalert-btn:focus {
-    background: #E95420 !important;
-    color: #fff !important;
-    box-shadow: none !important;
-    outline: none !important;
-}
 
 #reservationalert-btn svg {
     display: block;

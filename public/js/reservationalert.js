@@ -56,6 +56,12 @@
 
         $wrapper.append($btn).append($panel);
 
+        $btn.on('mouseenter', function () {
+            $(this).css({ background: '#E95420', color: '#fff', 'border-color': '#E95420' });
+        }).on('mouseleave', function () {
+            $(this).css({ background: '', color: '', 'border-color': '' });
+        });
+
         $btn.on('click', function (e) {
             e.stopPropagation();
             $panel.toggleClass('open');
