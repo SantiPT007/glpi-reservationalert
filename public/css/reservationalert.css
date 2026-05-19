@@ -14,7 +14,7 @@
     cursor: pointer;
     vertical-align: middle;
     border: none !important;
-    background: transparent !important;
+    background: transparent;
     box-shadow: none !important;
     border-radius: 50px !important;
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;

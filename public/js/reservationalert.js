@@ -57,9 +57,13 @@
         $wrapper.append($btn).append($panel);
 
         $btn.on('mouseenter', function () {
-            $(this).css({ background: '#E95420', color: '#fff', 'border-color': '#E95420' });
+            this.style.setProperty('background', '#E95420', 'important');
+            this.style.setProperty('color', '#fff', 'important');
+            this.style.setProperty('border-color', '#E95420', 'important');
         }).on('mouseleave', function () {
-            $(this).css({ background: '', color: '', 'border-color': '' });
+            this.style.removeProperty('background');
+            this.style.removeProperty('color');
+            this.style.removeProperty('border-color');
         });
 
         $btn.on('click', function (e) {
