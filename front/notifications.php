@@ -53,13 +53,7 @@ try {
         if (!$is_test) {
             global $CFG_GLPI;
             $root = $CFG_GLPI['root_doc'] ?? '';
-            if ($is_admin) {
-                $itemtype_lower = strtolower((string) ($row['item_type'] ?? ''));
-                $iid            = (int) ($row['item_items_id'] ?? 0);
-                $link = $root . '/front/' . $itemtype_lower . '.form.php?id=' . $iid . '&forcetab=Reservation%241';
-            } else {
-                $link = $root . '/front/reservation.php';
-            }
+            $link = $root . '/front/reservation.php';
         }
 
         $out[] = [

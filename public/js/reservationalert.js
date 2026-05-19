@@ -144,7 +144,7 @@
 
         notifications.forEach(function (n) {
             const linkHtml = n.link
-                ? `<a class="ra-item-link" href="${n.link}" target="_blank">${n.link.includes('reservation.php') ? 'Ver calendário' : 'Editar reserva'}</a>`
+                ? `<a class="ra-item-link" href="${n.link}" target="_blank">Ver reservas</a>`
                 : '';
 
             const $item = $(`
