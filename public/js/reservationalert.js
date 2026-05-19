@@ -143,11 +143,16 @@
         }
 
         notifications.forEach(function (n) {
+            const linkHtml = n.link
+                ? `<a class="ra-item-link" href="${n.link}" target="_blank">${n.link.includes('reservation.php') ? 'Ver calendário' : 'Editar reserva'}</a>`
+                : '';
+
             const $item = $(`
                 <div class="ra-item ${n.is_read ? '' : 'unread'}" data-id="${n.id}">
                     <span class="ra-item-title">${escHtml(n.item_name)}</span>
                     <span class="ra-item-meta">Início: ${escHtml(n.begin)}</span>
                     <span class="ra-item-meta">Reservado por: ${escHtml(n.reserver)}</span>
+                    ${linkHtml}
                     ${!n.is_read ? `<button class="ra-item-dismiss" data-id="${n.id}">Dispensar</button>` : ''}
                 </div>
             `);

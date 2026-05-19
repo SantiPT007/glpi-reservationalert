@@ -152,6 +152,18 @@
     text-decoration: underline;
 }
 
+.ra-item-link {
+    align-self: flex-start;
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--tblr-link-color, #066fd1);
+    text-decoration: none;
+}
+
+.ra-item-link:hover {
+    text-decoration: underline;
+}
+
 /* Empty state */
 .ra-empty {
     padding: 24px 16px;

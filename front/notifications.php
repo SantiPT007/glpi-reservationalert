@@ -49,12 +49,23 @@ foreach ($rows as $row) {
         $reserver = trim(($row['reserver_firstname'] ?? '') . ' ' . ($row['reserver_name'] ?? ''));
     }
 
+    $link = '';
+    if (!$is_test) {
+        $root = CFG_GLPI['root_doc'] ?? '';
+        if ((bool) $is_admin) {
+            $link = $root . '/front/' . strtolower((string) ($row['item_type'] ?? '')) . '.form.php?id=' . (int) ($row['item_items_id'] ?? 0) . '&forcetab=Reservation$1';
+        } else {
+            $link = $root . '/front/reservation.php';
+        }
+    }
+
     $out[] = [
         'id'        => (int) $row['id'],
         'item_name' => htmlspecialchars($item_name),
         'begin'     => $begin_str,
         'reserver'  => htmlspecialchars($reserver),
         'is_read'   => (bool) $row['is_read'],
+        'link'      => $link,
     ];
 }
 
