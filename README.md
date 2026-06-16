@@ -14,7 +14,7 @@ Plugin para GLPI 11 que envia alertas no tabuleiro (tray) do browser quando uma 
 
 ```bash
 cd /var/www/glpi/plugins
-git clone https://github.com/sntshk/glpi-reservationalert reservationalert
+git clone https://github.com/SantiPT007/glpi-reservationalert reservationalert
 ```
 
 ### 2. Corrigir permissões
