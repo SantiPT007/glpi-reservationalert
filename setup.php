@@ -56,8 +56,10 @@ function plugin_init_reservationalert(): void
         return;
     }
 
-    $PLUGIN_HOOKS['add_css']['reservationalert']        = ['public/css/reservationalert.css'];
-    $PLUGIN_HOOKS['add_javascript']['reservationalert'] = ['public/js/reservationalert.js'];
+    // GLPI 11.0.7+: registar SEM o prefixo `public/` (o core ja procura em public/ no disco).
+    // usar `public/...` aciona uma depreciacao que corrompe o JS servido (red banner + "Unexpected token '<'").
+    $PLUGIN_HOOKS['add_css']['reservationalert']        = ['css/reservationalert.css'];
+    $PLUGIN_HOOKS['add_javascript']['reservationalert'] = ['js/reservationalert.js'];
 
     if (Session::haveRight('config', UPDATE)) {
         $PLUGIN_HOOKS['config_page']['reservationalert'] = 'front/config.form.php';
