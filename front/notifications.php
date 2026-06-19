@@ -39,7 +39,9 @@ try {
             if ($itemtype && $items_id && class_exists($itemtype)) {
                 $item = new $itemtype();
                 if ($item->getFromDB($items_id)) {
-                    $item_name = $item->getName();
+                    // getFriendlyName() em vez de getName(): nome legivel canonico,
+                    // passa por computeFriendlyName() (ex.: Veiculo) e nunca devolve so o tipo
+                    $item_name = $item->getFriendlyName();
                 }
             }
             if (empty($item_name)) {
