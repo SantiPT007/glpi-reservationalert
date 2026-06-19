@@ -62,14 +62,16 @@ class Config extends CommonDBTM
 
     public static function getFormURL($full = true)
     {
-        return \Plugin::getWebDir('reservationalert', $full) . '/front/config.form.php';
+        // Plugin::getWebDir() esta depreciado no GLPI 11; construir o caminho a mao
+        global $CFG_GLPI;
+        return ($full ? $CFG_GLPI['root_doc'] : '') . '/plugins/reservationalert/front/config.form.php';
     }
 
     public static function getMenuContent()
     {
         return [
             'title' => 'Alertas de Reserva',
-            'page'  => \Plugin::getWebDir('reservationalert', false) . '/front/settings.php',
+            'page'  => '/plugins/reservationalert/front/settings.php',
             'icon'  => 'ti ti-bell',
             'links' => [],
         ];

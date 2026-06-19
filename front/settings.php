@@ -7,11 +7,14 @@
 
 include('../../../inc/includes.php');
 
+global $CFG_GLPI;
+
 Session::checkLoginUser();
 
 $config         = GlpiPlugin\Reservationalert\Config::getConfig();
 $global_enabled = (bool) ($config['global_enabled'] ?? true);
-$test_url       = Plugin::getWebDir('reservationalert') . '/front/test.php';
+// Plugin::getWebDir() esta depreciado no GLPI 11; construir o caminho a mao
+$test_url       = $CFG_GLPI['root_doc'] . '/plugins/reservationalert/front/test.php';
 
 Html::header('Alertas de Reserva', $_SERVER['PHP_SELF'], 'tools', 'reservationalert');
 ?>
@@ -86,7 +89,7 @@ Html::header('Alertas de Reserva', $_SERVER['PHP_SELF'], 'tools', 'reservational
             A alteracao e guardada apenas no browser. Outros dispositivos precisam de ativar separadamente.
             <?php if (Session::haveRight('config', UPDATE)): ?>
             <span class="ms-2">
-                <a href="<?= Plugin::getWebDir('reservationalert') ?>/front/config.form.php">
+                <a href="<?= $CFG_GLPI['root_doc'] ?>/plugins/reservationalert/front/config.form.php">
                     Definicoes globais (admin)
                 </a>
             </span>

@@ -6,6 +6,8 @@
 
 include('../../../inc/includes.php');
 
+global $CFG_GLPI;
+
 Session::checkRight('config', UPDATE);
 
 if (isset($_POST['warning_minutes'])) {
@@ -170,7 +172,7 @@ Html::header(
 
 <script>
 (function () {
-    var pluginRoot = <?= json_encode(Plugin::getWebDir('reservationalert')) ?>;
+    var pluginRoot = <?= json_encode($CFG_GLPI['root_doc'] . '/plugins/reservationalert') ?>;
     var csrfToken = document.querySelector('meta[property="glpi:csrf_token"]');
     var token = csrfToken ? csrfToken.getAttribute('content') : '';
 
@@ -272,7 +274,7 @@ Html::header(
 
 <script>
 (function () {
-    var pluginRoot  = <?= json_encode(Plugin::getWebDir('reservationalert')) ?>;
+    var pluginRoot  = <?= json_encode($CFG_GLPI['root_doc'] . '/plugins/reservationalert') ?>;
     var csrfMeta    = document.querySelector('meta[property="glpi:csrf_token"]');
     var token       = csrfMeta ? csrfMeta.getAttribute('content') : '';
 
