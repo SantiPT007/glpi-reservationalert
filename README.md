@@ -95,6 +95,18 @@ journalctl -u cron --since "10 minutes ago"
 
 Testar o cron manualmente no GLPI: **Configurar → Plugins → Reservation Alert → Configurar → Correr cron agora**
 
+**Fuso horário (causa mais comum).** O cron compara a hora do servidor (`new DateTime()` em
+PHP) com os horários das reservas. Se o fuso do servidor não coincidir com o local (ex.:
+container em **UTC** mas utilizadores em **Europe/Lisbon**), as reservas caem fora da janela
+de aviso e nada dispara — parecendo que o cron está parado. Garantir que o PHP e a base de
+dados correm no fuso local:
+
+- PHP: `date.timezone = Europe/Lisbon` no `php.ini` (ou um `.ini` em `conf.d/`).
+- Em Docker: definir `TZ=Europe/Lisbon` nos serviços do GLPI **e** da base de dados.
+
+Confirmar com **Correr cron agora**: a "Hora atual servidor" tem de bater certo com a hora
+local; se estiver desfasada, é fuso horário.
+
 ### Notificações duplicadas ou não aparecem
 
 Aceder ao endpoint de diagnóstico (admin):
