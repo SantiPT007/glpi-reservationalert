@@ -352,21 +352,19 @@ Html::header(
                     noExec.style.display = 'block';
                     execOk.style.display = 'none';
                 } else if (!data.crontab_available) {
-                    // sem comando crontab (ex.: docker glpi/glpi) — nada para instalar;
-                    // se a crontask correu ha pouco, o cron esta vivo por outro mecanismo
+                    // sem comando crontab (ex.: docker glpi/glpi) — o cron pode estar vivo
+                    // por outro mecanismo; botoes mantem-se e um clique explica o porque
                     noExec.style.display = 'none';
                     execOk.style.display = 'block';
-                    btnInstall.style.display = 'none';
-                    btnRemove.style.display  = 'none';
+                    setBadge(data.installed);
+                    userSpan.textContent = I18N.userLabel.replace('%s', data.crontab_user);
                     if (data.task_alive) {
                         badge.className   = 'badge bg-success';
                         badge.textContent = I18N.externalSched;
-                        userSpan.textContent = '';
                         result.textContent = I18N.externalNote.replace('%s', data.task_lastrun || '?');
                     } else {
                         badge.className   = 'badge bg-warning text-dark';
                         badge.textContent = I18N.notInstalled;
-                        userSpan.textContent = '';
                         result.textContent = I18N.crontabMissing;
                     }
                 } else {
