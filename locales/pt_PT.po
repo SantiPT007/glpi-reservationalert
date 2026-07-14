@@ -1,0 +1,259 @@
+# Reservation Alert - Português (Portugal)
+# Copyright (C) 2026 Santiago Almendra
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: reservationalert 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-14 00:00+0000\n"
+"PO-Revision-Date: 2026-07-14 00:00+0000\n"
+"Last-Translator: Santiago Almendra\n"
+"Language-Team: Português (Portugal)\n"
+"Language: pt_PT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Reservation Alerts"
+msgstr "Alertas de Reserva"
+
+msgid "Reservation Alerts: Settings"
+msgstr "Alertas de Reserva: Definições"
+
+msgid "The administrator has disabled reservation notifications globally. Contact an administrator to re-enable them."
+msgstr "O administrador desativou as notificações de reserva globalmente. Contacte um administrador para reativar."
+
+msgid "Notification bell in the header"
+msgstr "Sino de notificações no cabeçalho"
+
+msgid "Shows an icon with the pending alert count in the navigation bar."
+msgstr "Mostra um ícone com a contagem de alertas pendentes na barra de navegação."
+
+msgid "Enabled"
+msgstr "Ativado"
+
+msgid "Disabled"
+msgstr "Desativado"
+
+msgid "Diagnostic result"
+msgstr "Resultado do diagnóstico"
+
+msgid "Checking..."
+msgstr "A verificar..."
+
+msgid "This setting is stored in this browser only. Other devices need to enable it separately."
+msgstr "A alteração é guardada apenas neste browser. Outros dispositivos precisam de ativar separadamente."
+
+msgid "Global settings (admin)"
+msgstr "Definições globais (admin)"
+
+msgid "Invalid server response:"
+msgstr "Resposta inválida do servidor:"
+
+msgid "=== PHP warnings/errors ==="
+msgstr "=== Avisos/Erros PHP ==="
+
+msgid "=== Error ==="
+msgstr "=== Erro ==="
+
+msgid "=== Status: OK ==="
+msgstr "=== Estado: OK ==="
+
+msgid "Tables: OK"
+msgstr "Tabelas: OK"
+
+msgid "Notifications found:"
+msgstr "Notificações encontradas:"
+
+msgid "The bell is active. If it does not appear in the navigation bar, reload the page."
+msgstr "O sino está ativo. Se não aparecer na barra de navegação, recarregue a página."
+
+msgid "=== Status: error ==="
+msgstr "=== Estado: Erro ==="
+
+msgid "The bell may not work correctly. See the errors above."
+msgstr "O sino pode não funcionar corretamente. Veja os erros acima."
+
+msgid "Error"
+msgstr "Erro"
+
+msgid "Network failure: could not reach the server."
+msgstr "Falha de rede: não foi possível contactar o servidor."
+
+msgid "Enable reservation notifications globally"
+msgstr "Ativar notificações de reserva globalmente"
+
+msgid "When disabled, the notification bell is hidden for every user, regardless of their personal settings."
+msgstr "Quando desativado, o sino de notificações não aparece para nenhum utilizador, independentemente das suas definições pessoais."
+
+msgid "Warning period"
+msgstr "Período de aviso"
+
+msgid "(minutes before the reservation starts)"
+msgstr "(minutos antes do início da reserva)"
+
+msgid "Cron interval"
+msgstr "Intervalo do cron"
+
+msgid "(seconds between checks)"
+msgstr "(segundos entre cada verificação)"
+
+msgid "The minimum cron frequency is 60s. Lower values check more often but may degrade server performance; 300s (5 min) is recommended."
+msgstr "A frequência mínima do cron é 60s. Valores baixos verificam mais frequentemente mas podem degradar o desempenho do servidor; 300s (5 min) é o recomendado."
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Test tools"
+msgstr "Ferramentas de teste"
+
+msgid "Send test notification (all users)"
+msgstr "Enviar notificação de teste (todos os utilizadores)"
+
+msgid "Clear test notifications"
+msgstr "Limpar notificações de teste"
+
+msgid "Run cron now"
+msgstr "Correr cron agora"
+
+msgid "Force notification (all future reservations)"
+msgstr "Forçar notificação (todas as reservas futuras)"
+
+msgid "System crontab"
+msgstr "Crontab do sistema"
+
+msgid "Checking crontab status..."
+msgstr "A verificar estado do crontab..."
+
+msgid "exec() is disabled on this server."
+msgstr "exec() desativado neste servidor."
+
+msgid "Install the crontab manually over SSH using the command below."
+msgstr "Instale o crontab manualmente via SSH com o comando abaixo."
+
+msgid "Status:"
+msgstr "Estado:"
+
+msgid "Install crontab"
+msgstr "Instalar crontab"
+
+msgid "Remove crontab"
+msgstr "Remover crontab"
+
+msgid "Generated command (copy to install manually):"
+msgstr "Comando gerado (copie para instalar manualmente):"
+
+msgid "Sending"
+msgstr "A enviar"
+
+msgid "Clearing"
+msgstr "A limpar"
+
+msgid "Test notifications removed."
+msgstr "Notificações de teste removidas."
+
+msgid "Inserted for %s user(s). The tray updates within 60s."
+msgstr "Inserido para %s utilizador(es). O tabuleiro atualiza em até 60s."
+
+msgid "Error:"
+msgstr "Erro:"
+
+msgid "Forcing notifications..."
+msgstr "A forçar notificações..."
+
+msgid "Future reservations found:"
+msgstr "Reservas futuras encontradas:"
+
+msgid "Notifications created:"
+msgstr "Notificações criadas:"
+
+msgid "Already existed (skipped):"
+msgstr "Já existiam (ignoradas):"
+
+msgid "Reservation #"
+msgstr "Reserva #"
+
+msgid "start:"
+msgstr "início:"
+
+msgid "No future reservations found in the database."
+msgstr "Nenhuma reserva futura encontrada na base de dados."
+
+msgid "Running cron..."
+msgstr "A correr cron..."
+
+msgid "Result:"
+msgstr "Resultado:"
+
+msgid "Reservations found in the %s-minute window:"
+msgstr "Reservas encontradas na janela de %s min:"
+
+msgid "Current server time:"
+msgstr "Hora atual do servidor:"
+
+msgid "Threshold:"
+msgstr "Limite:"
+
+msgid "Reservations found:"
+msgstr "Reservas encontradas:"
+
+msgid "No reservations within the warning window."
+msgstr "Nenhuma reserva dentro da janela de aviso."
+
+msgid "PHP output:"
+msgstr "Output PHP:"
+
+msgid "Installed"
+msgstr "Instalado"
+
+msgid "Not installed"
+msgstr "Não instalado"
+
+msgid "(user: %s)"
+msgstr "(utilizador: %s)"
+
+msgid "Failed to check crontab status."
+msgstr "Erro ao verificar estado do crontab."
+
+msgid "Crontab installed successfully."
+msgstr "Crontab instalado com sucesso."
+
+msgid "Crontab removed successfully."
+msgstr "Crontab removido com sucesso."
+
+msgid "unknown failure."
+msgstr "falha desconhecida."
+
+msgid "Installing"
+msgstr "A instalar"
+
+msgid "Removing"
+msgstr "A remover"
+
+msgid "HTTP error"
+msgstr "Erro HTTP"
+
+msgid "[TEST] Test notification"
+msgstr "[TESTE] Notificação de teste"
+
+msgid "Now"
+msgstr "Agora"
+
+msgid "Unknown item"
+msgstr "Item desconhecido"
+
+msgid "Table %s does not exist."
+msgstr "A tabela %s não existe."
+
+msgid "The plugin needs to be reinstalled: Setup > Plugins > Disable > Enable."
+msgstr "O plugin precisa de ser reinstalado: Configurar > Plugins > Desativar > Ativar."
+
+msgid "Unknown action."
+msgstr "Ação desconhecida."
+
+msgid "Cron task not found. Reinstall the plugin (disable and enable it)."
+msgstr "Cron task não encontrado. Reinstale o plugin (desativar e ativar)."
+
+msgid "Send alerts for reservations starting soon"
+msgstr "Enviar alertas para reservas a iniciar em breve"
