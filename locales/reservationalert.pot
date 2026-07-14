@@ -259,3 +259,15 @@ msgstr ""
 
 msgid "Send alerts for reservations starting soon"
 msgstr ""
+
+msgid "crontab exited with code %s"
+msgstr ""
+
+msgid "The crontab command is not available on this server."
+msgstr ""
+
+msgid "Active (external scheduler)"
+msgstr ""
+
+msgid "Cron is running anyway (last run: %s) — handled by the container/system scheduler, no crontab entry needed."
+msgstr ""

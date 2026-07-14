@@ -257,3 +257,15 @@ msgstr "Cron task não encontrado. Reinstale o plugin (desativar e ativar)."
 
 msgid "Send alerts for reservations starting soon"
 msgstr "Enviar alertas para reservas a iniciar em breve"
+
+msgid "crontab exited with code %s"
+msgstr "o crontab terminou com código %s"
+
+msgid "The crontab command is not available on this server."
+msgstr "O comando crontab não está disponível neste servidor."
+
+msgid "Active (external scheduler)"
+msgstr "Ativo (scheduler externo)"
+
+msgid "Cron is running anyway (last run: %s) — handled by the container/system scheduler, no crontab entry needed."
+msgstr "O cron está a correr na mesma (última execução: %s) — gerido pelo scheduler do container/sistema, não é precisa entrada no crontab."

@@ -300,6 +300,9 @@ Html::header(
     var I18N = {
         installed:      <?= json_encode(__('Installed', 'reservationalert')) ?>,
         notInstalled:   <?= json_encode(__('Not installed', 'reservationalert')) ?>,
+        externalSched:  <?= json_encode(__('Active (external scheduler)', 'reservationalert')) ?>,
+        externalNote:   <?= json_encode(__('Cron is running anyway (last run: %s) — handled by the container/system scheduler, no crontab entry needed.', 'reservationalert')) ?>,
+        crontabMissing: <?= json_encode(__('The crontab command is not available on this server.', 'reservationalert')) ?>,
         userLabel:      <?= json_encode(__('(user: %s)', 'reservationalert')) ?>,
         statusFail:     <?= json_encode(__('Failed to check crontab status.', 'reservationalert')) ?>,
         installOk:      <?= json_encode(__('Crontab installed successfully.', 'reservationalert')) ?>,
@@ -348,6 +351,24 @@ Html::header(
                 if (!data.exec_available) {
                     noExec.style.display = 'block';
                     execOk.style.display = 'none';
+                } else if (!data.crontab_available) {
+                    // sem comando crontab (ex.: docker glpi/glpi) — nada para instalar;
+                    // se a crontask correu ha pouco, o cron esta vivo por outro mecanismo
+                    noExec.style.display = 'none';
+                    execOk.style.display = 'block';
+                    btnInstall.style.display = 'none';
+                    btnRemove.style.display  = 'none';
+                    if (data.task_alive) {
+                        badge.className   = 'badge bg-success';
+                        badge.textContent = I18N.externalSched;
+                        userSpan.textContent = '';
+                        result.textContent = I18N.externalNote.replace('%s', data.task_lastrun || '?');
+                    } else {
+                        badge.className   = 'badge bg-warning text-dark';
+                        badge.textContent = I18N.notInstalled;
+                        userSpan.textContent = '';
+                        result.textContent = I18N.crontabMissing;
+                    }
                 } else {
                     noExec.style.display = 'none';
                     execOk.style.display = 'block';

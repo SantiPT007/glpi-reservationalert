@@ -51,18 +51,48 @@ function ra_exec_available(): bool
         && !in_array('shell_exec', $disabled, true);
 }
 
+// o comando crontab pode nem existir (ex.: imagem docker glpi/glpi, que corre
+// as crontasks com um scheduler proprio em vez de cron) — detetar antes de usar
+function ra_crontab_available(): bool
+{
+    return trim((string) shell_exec('which crontab 2>/dev/null')) !== '';
+}
+
+// estado da crontask no GLPI: se correu ha pouco, o cron esta vivo seja por
+// crontab, scheduler do container ou outro mecanismo externo
+function ra_task_status(): array
+{
+    $task = new CronTask();
+    if (!$task->getFromDBbyName('GlpiPlugin\\Reservationalert\\CronHandler', 'CheckReservations')) {
+        return ['lastrun' => null, 'alive' => false];
+    }
+    $lastrun = $task->fields['lastrun'] ?? null;
+    $freq    = max(60, (int) ($task->fields['frequency'] ?? 300));
+    $alive   = !empty($lastrun) && (time() - strtotime($lastrun)) < max(600, $freq * 3);
+    return ['lastrun' => $lastrun, 'alive' => $alive];
+}
+
 function ra_read_crontab(): string
 {
     return (string) shell_exec('crontab -l 2>/dev/null');
 }
 
-function ra_write_crontab(string $content): bool
+// devolve [ok, mensagem de erro] — stderr capturado para nunca falhar em silencio
+function ra_write_crontab(string $content): array
 {
     $tmp = tempnam(sys_get_temp_dir(), 'glpi_ra_crontab_');
     file_put_contents($tmp, $content);
-    exec('crontab ' . escapeshellarg($tmp), $out, $code);
+    exec('crontab ' . escapeshellarg($tmp) . ' 2>&1', $out, $code);
     unlink($tmp);
-    return $code === 0;
+
+    $error = '';
+    if ($code !== 0) {
+        $error = trim(implode("\n", $out));
+        if ($error === '') {
+            $error = sprintf(__('crontab exited with code %s', 'reservationalert'), $code);
+        }
+    }
+    return [$code === 0, $error];
 }
 
 function ra_remove_block(string $crontab, string $begin, string $end): string
@@ -77,15 +107,20 @@ function ra_remove_block(string $crontab, string $begin, string $end): string
 $action = $_POST['action'] ?? $_GET['action'] ?? 'status';
 
 if ($action === 'status') {
-    $exec_ok = ra_exec_available();
-    $crontab = $exec_ok ? ra_read_crontab() : '';
-    $user    = $exec_ok ? trim((string) shell_exec('whoami')) : 'N/A';
+    $exec_ok    = ra_exec_available();
+    $crontab_ok = $exec_ok && ra_crontab_available();
+    $crontab    = $crontab_ok ? ra_read_crontab() : '';
+    $user       = $exec_ok ? trim((string) shell_exec('whoami')) : 'N/A';
+    $task       = ra_task_status();
 
     echo json_encode([
-        'exec_available' => $exec_ok,
-        'installed'      => $exec_ok && str_contains($crontab, $marker_begin),
-        'cron_line'      => $cron_line,
-        'crontab_user'   => $user,
+        'exec_available'    => $exec_ok,
+        'crontab_available' => $crontab_ok,
+        'installed'         => $crontab_ok && str_contains($crontab, $marker_begin),
+        'cron_line'         => $cron_line,
+        'crontab_user'      => $user,
+        'task_lastrun'      => $task['lastrun'],
+        'task_alive'        => $task['alive'],
     ]);
     exit;
 }
@@ -96,18 +131,24 @@ if (!ra_exec_available()) {
     exit;
 }
 
+if (!ra_crontab_available()) {
+    http_response_code(500);
+    echo json_encode(['ok' => false, 'error' => __('The crontab command is not available on this server.', 'reservationalert')]);
+    exit;
+}
+
 if ($action === 'install') {
     $crontab = ra_remove_block(ra_read_crontab(), $marker_begin, $marker_end);
     $crontab = rtrim($crontab) . "\n" . $block . "\n";
-    $ok      = ra_write_crontab($crontab);
-    echo json_encode(['ok' => $ok, 'installed' => $ok]);
+    [$ok, $error] = ra_write_crontab($crontab);
+    echo json_encode(['ok' => $ok, 'installed' => $ok, 'error' => $error]);
     exit;
 }
 
 if ($action === 'remove') {
     $crontab = ra_remove_block(ra_read_crontab(), $marker_begin, $marker_end);
-    $ok      = ra_write_crontab(rtrim($crontab) . "\n");
-    echo json_encode(['ok' => $ok, 'installed' => false]);
+    [$ok, $error] = ra_write_crontab(rtrim($crontab) . "\n");
+    echo json_encode(['ok' => $ok, 'installed' => false, 'error' => $error]);
     exit;
 }
 
