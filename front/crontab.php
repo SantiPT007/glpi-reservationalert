@@ -125,15 +125,15 @@ if ($action === 'status') {
     exit;
 }
 
+// condicoes esperadas: responder 200 com ok=false para o JS mostrar a mensagem
+// limpa em vez de cair no handler de erro HTTP com o JSON cru
 if (!ra_exec_available()) {
-    http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => __('exec() is disabled on this server.', 'reservationalert')]);
+    echo json_encode(['ok' => false, 'installed' => false, 'error' => __('exec() is disabled on this server.', 'reservationalert')]);
     exit;
 }
 
 if (!ra_crontab_available()) {
-    http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => __('The crontab command is not available on this server.', 'reservationalert')]);
+    echo json_encode(['ok' => false, 'installed' => false, 'error' => __('The crontab command is not available on this server.', 'reservationalert')]);
     exit;
 }
 

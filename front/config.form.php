@@ -391,7 +391,10 @@ Html::header(
                 }
             })
             .fail(function (xhr) {
-                result.textContent = I18N.httpError + ' ' + xhr.status + ': ' + xhr.responseText;
+                var msg = (xhr.responseJSON && xhr.responseJSON.error)
+                    ? xhr.responseJSON.error
+                    : xhr.responseText;
+                result.textContent = I18N.error + ' (HTTP ' + xhr.status + ') ' + msg;
             });
     }
 
